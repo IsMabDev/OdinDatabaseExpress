@@ -3,6 +3,7 @@ const {
   getFiltredUsernames,
   deleteAllUsers,
 } = require("../db/queries");
+const populateDB=require("../db/populateDB")
 exports.usersListGet = async (req, res) => {
   if(!req.query.search) {const users = await getAllUsernames();
   res.render("index", { users });
@@ -25,3 +26,7 @@ exports.deleteGet = async (req, res) => {
   
 }
 
+exports.populateGet = async (req, res) => {
+  await populateDB();
+  res.redirect("/")
+}

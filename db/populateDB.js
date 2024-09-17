@@ -15,11 +15,10 @@ VALUES
   ('Damon');
 `;
 
-async function main() {
+async function populateDB() {
   console.log("seeding...");
   const client = new Client({
-    connectionString:
-      "postgresql://issam:psqlPassword@localhost:5432/top_users",
+    connectionString: `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/top_users`,
   });
   await client.connect();
   await client.query(SQL);
@@ -27,4 +26,4 @@ async function main() {
   console.log("done");
 }
 
-main();
+module.exports=populateDB
