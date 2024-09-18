@@ -3,13 +3,15 @@ const {
   getFiltredUsernames,
   deleteAllUsers,
 } = require("../db/queries");
-const populateDB=require("../db/populateDB")
+const populateDB = require("../db/populateDB")
+
 exports.usersListGet = async (req, res) => {
   if(!req.query.search) {const users = await getAllUsernames();
   res.render("index", { users });
   }
   else {
     const users = await getFiltredUsernames(req.query.search);
+    console.log('req.query.search: ', req.query.search);
 
     if (users.length === 0) {
       res.send("No user names with your searching queries")
@@ -29,4 +31,9 @@ exports.deleteGet = async (req, res) => {
 exports.populateGet = async (req, res) => {
   await populateDB();
   res.redirect("/")
+}
+
+exports.testGet =  (req, res) => {
+  console.log("test get", req.query.search);
+  res.send("Hi this is a test")
 }

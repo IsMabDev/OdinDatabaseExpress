@@ -12,13 +12,14 @@ INSERT INTO usernames (username)
 VALUES
   ('Bryan'),
   ('Odin'),
-  ('Damon');
+  ('Damon'),
+  ('Minzo');
 `;
 
 async function populateDB() {
   console.log("seeding...");
   const client = new Client({
-    connectionString: `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/top_users`,
+    connectionString: `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
   });
   await client.connect();
   await client.query(SQL);
