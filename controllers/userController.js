@@ -2,6 +2,7 @@ const {
   getAllUsernames,
   getFiltredUsernames,
   deleteAllUsers,
+  createUsernames
 } = require("../db/queries");
 const populateDB = require("../db/populateDB")
 
@@ -36,4 +37,9 @@ exports.populateGet = async (req, res) => {
 exports.testGet =  (req, res) => {
   console.log("test get", req.query.search);
   res.send("Hi this is a test")
+}
+
+exports.createTableGet = async (req, res, next) => {
+  await createUsernames();
+  next()
 }

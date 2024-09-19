@@ -1,5 +1,22 @@
 const pool = require("./pool");
 
+async function createUsernames() {
+
+  const createTable=  `CREATE TABLE IF NOT EXISTS usernames(
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  username VARCHAR(255)
+)`
+   try {
+    // Execute the query
+    await pool.query(createTable);
+    console.log("Table 'usernames' created (if not already exists).");
+  } catch (err) {
+    console.error('Error creating table:', err.stack);
+   }
+};
+
+ 
+
 async function getAllUsernames() {
 
   const { rows } = await pool.query("SELECT * FROM usernames");
@@ -28,4 +45,5 @@ module.exports = {
   insertUsername,
   getFiltredUsernames,
   deleteAllUsers,
+  createUsernames
 };
